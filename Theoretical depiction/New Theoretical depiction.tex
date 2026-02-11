@@ -50,7 +50,7 @@
 
 \institute{%
 $^{*}$Московский авиационный институт (национальный исследовательский университет),\\ Москва, Россия\\
-e-mail: $^{a}$max$\_$max82@inbox.ru,, $^{c}$siemenkv@gmail.com, $^{c}$gfsurzhikov@gmail.com}
+e-mail: $^{a}$max$\_$max82@inbox.ru, $^{c}$siemenkv@gmail.com, $^{c}$gfsurzhikov@gmail.com}
 
 
 \received{Поступила в редколлегию XX.XX.2026}
@@ -63,14 +63,11 @@ e-mail: $^{a}$max$\_$max82@inbox.ru,, $^{c}$siemenkv@gmail.com, $^{c}$gfsurzhiko
 \maketitle 
 
 \begin{abstract}
-В~работе построен нелинейный фильтр для оценивания состояний процесса с~коррелированной старшей производной по наблюдениям, содержащим гауссовский белый шум неизвестной интенсивности.
-Фильтр содержит нелинейное звено, которое является аппроксимацией линейного преобразования обновляющего процесса в~фильтре Калмана"--~Бьюси при произвольном выборе интенсивности помех.
-Вектор оценок определяется дифференциальной системой того же порядка, что и вектор состояния без использования уравнений на ковариационную матрицу ошибки. 
-По результатам численного эксперимента даны рекомендации по выбору настроечного параметра нелинейного фильтра для учета корреляции в~модели сигнала.
+В~работе построен ЕМ-алгоритм для оценивания угловых координат неподвижных объектов при наличии пропусков в наблюдениях.
 \end{abstract}
 
 \textbf{КЛЮЧЕВЫЕ СЛОВА:} 
-оценивание угловых координат, ЕМ-алгоритм, наблюдения с пропусками, линейная равномерная антенная решетка.
+оценивание угловых координат, ЕМ-алгоритм, наблюдения с пропусками, линейная равномерная антенная решетка, оценка максимального правдоподобия.
 
 \section{Введение}
 В парадигме статистической обработки сигналов особое место занимает задача оценивания угловых координат (DoA) источников сигналов~\cite{KrimViberg, Godara}. Существуют две основные категории методов для оценивания угловых координат: подпространственные (к примеру, CAPON, MUSIC, ESPRIT), основанные на разбиении ковариационной матрицы наблюдений на подпространство, соответствующее сигналу, и подпространство, соответствующее шуму, и методы, основанные на поиске ММП-оценки. Последние оказываются особенно полезными в постановках задач, предполагающих относительно низкое отношение сигнал-шум, корреляцию между сигналами или малое число наблюдений.  \\
@@ -552,36 +549,36 @@ $\mathcal{Q}_1(\widetilde{u}^{(j)}\mid u^{(\tau-1)}) > \mathcal{Q}_1(u^{(\tau-1)
 \begin{thebibliography}{9}
 %
 \bibitem{KrimViberg}
-Krim H., Viberg M. Two decades of array signal processing research: the parametric approach // IEEE Signal Processing Magazine. – 1996. – Vol. 13, No. 4. – P. 67–94. – DOI: 10.1109/79.526899.
+Krim H., Viberg M. Two decades of array signal processing research: the parametric approach. {\em IEEE Signal Processing Magazine}, 1996,  Vol. 13, No. 4, pp. 67–94.
 \bibitem{Godara}
-Godara L. C. Application of antenna arrays to mobile communications. Part II: Beam-forming and direction-of-arrival considerations // Proceedings of the IEEE. – 1997. – Vol. 85, No. 8. – P. 1195-1245. – DOI: 10.1109/5.622504.
+Godara L. C. Application of antenna arrays to mobile communications. Part II: Beam-forming and direction-of-arrival considerations. {\em Proceedings of the IEEE}, 1997, Vol. 85, No. 8, pp. 1195-1245.
 \bibitem{DempsterRubin}
-Dempster A. P., Laird N. M., Rubin D. B. Maximum likelihood from incomplete data via the EM algorithm // Journal of the Royal Statistical Society: Series B (Methodological). – 1977. – Vol. 39, No. 1.  – P. 1-38.
+Dempster A. P., Laird N. M., Rubin D. B. Maximum likelihood from incomplete data via the EM algorithm. {\em Journal of the Royal Statistical Society: Series B (Methodological)}, 1977,  Vol. 39, No. 1, pp. 1-38.
 \bibitem{MengRubin}
-Meng X.-L., Rubin D. B. Maximum likelihood estimation via the ECM algorithm: a general framework // Biometrika. – 1993. – Vol. 80, No. 2. – P. 267-278. – DOI: 10.1093/biomet/80.2.267.
+Meng X.-L., Rubin D. B. Maximum likelihood estimation via the ECM algorithm: a general framework. {\em Biometrika}, 1993, Vol. 80, No. 2, pp. 267-278.
 \bibitem{FesslerHero}
-Fessler J. A., Hero A. O. Space-alternating generalized expectation-maximization algorithm // IEEE Transactions on Signal Processing. — 1994. – Vol. 42, No. 10. – P. 2664-2677. – DOI: 10.1109/78.324732.
+Fessler J. A., Hero A. O. Space-alternating generalized expectation-maximization algorithm. {\em IEEE Transactions on Signal Processing}, 1994, Vol. 42, No. 10, pp. 2664-2677. 
 \bibitem{Wu}
-Wu C. F. J. On the convergence properties of the EM algorithm // The Annals of Statistics. – 1983. – Vol. 11, No. 1. –  P. 95–103.
+Wu C. F. J. On the convergence properties of the EM algorithm. {\em The Annals of Statistics}, 1983, Vol. 11, No. 1,  pp. 95–103.
 \bibitem{MillerFuhrmann}
-Miller M. I., Fuhrmann D. R. Maximum‑likelihood narrow‑band direction finding and the EM algorithm // IEEE Transactions on Acoustics, Speech, and Signal Processing. – 1990. – Vol. 38, No. 9. – P. 1560-1577. – DOI: 10.1109/29.60075.
+Miller M. I., Fuhrmann D. R. Maximum‑likelihood narrow‑band direction finding and the EM algorithm.  {\em IEEE Transactions on Acoustics, Speech, and Signal Processing}, 1990, Vol. 38, No. 9,  pp. 1560-1577.
 \bibitem{FederWeinstein}
-Feder M., Weinstein E. Parameter estimation of superimposed signals using the EM algorithm // IEEE Transactions on Acoustics, Speech, and Signal Processing. – 1988. – Vol. 36, No. 4. – P. 477-489. – DOI: 10.1109/29.1552.
+Feder M., Weinstein E. Parameter estimation of superimposed signals using the EM algorithm. {\em IEEE Transactions on Acoustics, Speech, and Signal Processing}, 1988, Vol. 36, No. 4, pp. 477-489.
 \bibitem{GongLyu2021}
-Gong M.-Y., Lyu B. Alternating maximization and the EM algorithm in maximum‑likelihood direction finding // IEEE Trans. Veh. Technol. – 2021. – Vol. 70, No. 10. – P. 9634-9645. – DOI: 10.1109/TVT.2021.3106794.
+Gong M.-Y., Lyu B. Alternating maximization and the EM algorithm in maximum‑likelihood direction finding. {\em IEEE Trans. Veh. Technol.}, 2021, Vol. 70, No. 10, pp. 9634-9645. 
 \bibitem{GongLyu2023}
-Gong M.-Y., Lyu B. EM and SAGE Algorithms for DOA Estimation in the Presence of Unknown Uniform Noise // Sensors. – 2023. – Vol. 23, No. 10. – 4811. – DOI: 10.3390/s23104811.
+Gong M.-Y., Lyu B. EM and SAGE Algorithms for DOA Estimation in the Presence of Unknown Uniform Noise. {\em Sensors}, 2023, Vol. 23, No. 10.
 \bibitem{Louis}
-Louis T. A. Finding the observed information matrix when using the EM algorithm // 
-Journal of the Royal Statistical Society: Series B (Methodological). – 1982. – Vol. 44, No. 2. – P. 226–233.
+Louis T. A. Finding the observed information matrix when using the EM algorithm. 
+{\em Journal of the Royal Statistical Society: Series B (Methodological)}, 1982, Vol. 44, No. 2, pp. 226–233.
 \bibitem{Ross}
-Ross S. M. A first course in probability. 8th ed. – Upper Saddle River, N. J.: Prentice Hall, 2010. – 640p., p. 348.
+Ross S. M. {\em A first course in probability. 8th ed.} Upper Saddle River, N. J.: Prentice Hall, 2010. 640p., p. 348.
 \bibitem{LittleRubin}
-Little R. J. A., Rubin D. B. Statistical analysis with missing data 3rd ed. – Hoboken, N. J.: Wiley, 2019. – 462p.
+Little R. J. A., Rubin D. B. {\em Statistical analysis with missing data 3rd ed.} Hoboken, N. J.: Wiley, 2019, 462p.
 \bibitem{SchreierScharf}
-Schreier P. J., Scharf L. L. Statistical Signal Processing of Complex-Valued Data: The Theory of Improper and Noncircular Signals – Cambridge: Cambridge University Press, 2010. – 309p., pp. 41-42.
+Schreier P. J., Scharf L. L. {\em Statistical Signal Processing of Complex-Valued Data: The Theory of Improper and Noncircular Signals.} Cambridge: Cambridge University Press, 2010. 309p., pp. 41-42.
 \bibitem{NocedalWright}
-Nocedal J., Wright S.J. Numerical Optimization. 2nd ed. – New York: Springer, 2006. –  664p., pp. 10-37.
+Nocedal J., Wright S.J. {\em Numerical Optimization. 2nd ed.} New York: Springer, 2006. 664p., pp. 10-37.
 \end{thebibliography}
 \end{document}
 
