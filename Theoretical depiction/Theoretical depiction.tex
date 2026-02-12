@@ -30,6 +30,7 @@
 \def\bGamma{{\mathbf{\Gamma}}}
 \def\bLambda{{\mathbf{\Lambda}}}
 \def\CN{{\mathcal{CN}}}
+\def\Info{{\mathcal{I}}}
 
 \def\Natural{{\mathbb{N}}}
 \def\Real{{\mathbb{R}}}
@@ -71,7 +72,7 @@ e-mail: $^{a}$max$\_$max82@inbox.ru, $^{c}$siemenkv@gmail.com, $^{c}$gfsurzhikov
 \maketitle 
 
 \begin{abstract}
-В~работе построен ЕМ-алгоритм для оценивания угловых координат неподвижных объектов при наличии пропусков в наблюдениях.
+В~работе построен ЕМ-алгоритм для оценивания угловых координат неподвижных объектов при наличии пропусков в наблюдениях, полученных линейной равномерной антенной решеткой. Пропуски в наблюдениях рассматриваются как результат стохастических аппаратных сбоев. В качестве скрытых переменных рассматриваются как пропуски в наблюдениях, так и исходные сигналы. Предложенный алгоритм способен находить оптимальные оценки угловых координат при достаточно хорошей инициализации и малом числе источников сигналов.
 \end{abstract}
 
 \textbf{КЛЮЧЕВЫЕ СЛОВА:} 
@@ -101,7 +102,7 @@ e^{-2i\pi \frac{\text{d}}{\lambda}\sin(\theta_1)}& e^{-2i\pi \frac{\text{d}}{\la
 e^{-2i\pi (L-1) \frac{\text{d}}{\lambda}\sin(\theta_1)}& e^{-2i\pi (L-1) \frac{\text{d}}{\lambda}\sin(\theta_2)}&\dots&e^{-2i\pi (L-1) \frac{\text{d}}{\lambda}\sin(\theta_K)}\\
 \end{bmatrix},
 \end{equation*}
-где $i$ -- мнимая единица, $d$ -- расстояние между сенсорами, $\lambda$ -- длина волны, $\theta_k$ -- угловая координата $k$-го источника, $k = 1, \ldots, K$. Через $x = [x_1,\ldots, x_T]$ будем обозначать реализацию случайной матрицы $X=[X_1,\ldots, X_T]$. Для каждого момента времени $t=1,\ldots,T$ определено непустое множество индексов, соответстветствующих доступным (для наблюдения) компонентам вектора $X_t$: $o_t \subseteq \{1, \ldots, L\}, \quad 1 \leq |o_t| \leq L$, и множество индексов, соответствующих пропускам в векторе $X_t$: $m_t \subset \{1, \ldots, L\}$, причем $o_t \cup m_t = \{1,\ldots,L\}, o_t \cap m_t = \varnothing,  \forall t \in \{1,\ldots,T\}$. Доступная и недоступная части вектора $X_t$ обозначаются через $X_{t,o_t} = ((X_t)_i)_{i \in o_t} \in \Complex{С}^{|o_t|}$ и $X_{t,m_t} = ((X_t)_i)_{i \in m_t} \in \Complex{С}^{|m_t|}$ соответственно. Таким образом, будем считать, что набор наблюдений $X$ состоит из доступной части $X_o = \{X_{t, o_t}\}_{t=1}^T$ и недоступной: $X_m = \{X_{t, m_t}\}_{t=1}^T$. \\
+где $i$ -- мнимая единица, $d$ -- расстояние между сенсорами, $\lambda$ -- длина волны, $\theta_k$ -- угловая координата $k$-го источника, $k = 1, \ldots, K$. Через $x = [x_1,\ldots, x_T]$ будем обозначать реализацию случайной матрицы $X=[X_1,\ldots, X_T]$. Для каждого момента времени $t=1,\ldots,T$ определено непустое множество индексов, соответстветствующих доступным (для наблюдения) компонентам вектора $X_t$: $o_t \subseteq \{1, \ldots, L\}, \quad 1 \leq |o_t| \leq L$, и множество индексов, соответствующих пропускам в векторе $X_t$: $m_t \subset \{1, \ldots, L\}$, причем $o_t \cup m_t = \{1,\ldots,L\}, o_t \cap m_t = \varnothing,  \forall t \in \{1,\ldots,T\}$. Доступная и недоступная части вектора $X_t$ обозначаются через $X_{t,o_t} = ((X_t)_i)_{i \in o_t} \in \Complex{С}^{|o_t|}$ и $X_{t,m_t} = ((X_t)_i)_{i \in m_t} \in \Complex{С}^{|m_t|}$ соответственно. Таким образом, будем считать, что набор наблюдений $X$ состоит из доступной части $X_o = \{X_{t, o_t}\}_{t=1}^T$ и недоступной: $X_m = \{X_{t, m_t}\}_{t=1}^T$. Предполагается, что пропуски в наблюдениях $X_t$ являются абсолютно случайными, то есть относятся к типу MCAR по классификации Дональда Рубина. Вероятность возникновения таких пропусков не зависит от наблюдаемых или ненаблюдаемых данных. Также предполагается, что для реализации $x$ случайной матрицы $X$ расположение пропусков известно.\\
 
 Cигналы, испускаемые источниками, шумы на сенсорах и наблюдения предполагаются стохастическими: $S_t \sim \CN(\mathbf{O}_{K \times 1},\bGamma)$, $N_t \sim \CN(\mathbf{O}_{L \times 1}, \bLambda)$, $ X_t \sim \CN(\mathbf{O}_{L \times 1}, \bA(\theta)\bGamma\bA(\theta)^* + \bLambda)$, $t=1,\ldots,T$, где $\CN$ соответствует комплексному нормальному распределению с нулевой псевдоковариацией. Матрица $\bLambda$ предполагается диагональной, т.е. шумы не коррелированы между собой, также в любой момент времени $S_t \perp N_t$. Требуется найти оптимальные оценки параметров $\Upsilon = (\theta, \bGamma)$.
 \section{Описание алгоритма}
@@ -126,17 +127,26 @@ $$
  \Mexp_{q(\Xi)}[\log \Prob(X, S)]= \Mexp_{(X_m,S) \mid X_o=x_o, \Upsilon^{(\tau-1)}}[\log \Prob(X, S)].
 \end{equation*}
 
-Преобразуем выражение, учитывая тот факт, что наблюдения являются независимыми и одинаково распределенными, и обозначив через $\mathcal{I}$ доступную информацию $X_o=x_o, \Upsilon^{(\tau-1)}$  на итерации $\tau$  и через $q(\Xi_t)$ распределение $\Prob(X_{t,m_t},S_t \mid X_{t,o_t}=x_{t,o_t}, \Upsilon^{(\tau-1)})$:
+Преобразуем выражение, учитывая тот факт, что наблюдения являются независимыми и одинаково распределенными, и обозначив через $\Info$ доступную информацию $X_o=x_o, \Upsilon^{(\tau-1)}$  на итерации $\tau$  и через $q(\Xi_t)$ распределение $\Prob(X_{t,m_t},S_t \mid X_{t,o_t}=x_{t,o_t}, \Upsilon^{(\tau-1)})$:
 \begin{equation*}
 \begin{gathered}
  \Mexp_{q(\Xi)}[\log \Prob(X, S)] = \\
  \Mexp_{q(\Xi)}[\log \Prob(X\mid S) + \log \Prob(S)] = \\
 \Big[\sum_{t=1}^T  \Mexp_{q(\Xi_t)} \log [\Prob(X_t \mid S_t)] + \sum_{t=1}^T \Mexp_{q(\Xi_t)}[\log \Prob(S_t)]\Big] = \\
 - T \Big[\log|\bLambda| +\Tr \big( \bLambda^{-1} \Mexp_{q(\Xi)}[XX^*] \big) - 2 \Re \Tr\big(\bA^*(\theta) \bLambda^{-1} \Mexp_{q(\Xi)}[X S^*]\big) \\
-+ \Tr(\bLambda^{-1} \bA(\theta) \Mexp_{q(\Xi)}[SS^*] \bA^*(\theta)) + \log |\bGamma| + \Tr(\bGamma^{-1} \Mexp_{q(\Xi)}[SS^*]) \Big]. 
++ \Tr(\bLambda^{-1} \bA(\theta) \Mexp_{q(\Xi)}[SS^*] \bA^*(\theta)) + \log |\bGamma| + \Tr(\bGamma^{-1} \Mexp_{q(\Xi)}[SS^*]) \Big],
 \end{gathered}
 \end{equation*}
-
+где:
+\begin{equation}
+\Mexp_{q(\Xi)}[XX^*] = \frac{1}{T}\sum_{t=1}^T \Mexp_{q(\Xi)}[X_t X_t^* ], 
+\end{equation}
+\begin{equation}
+\Mexp_{q(\Xi)}[S S^*] =  \frac{1}{T} \sum_{t=1}^T \Mexp_{q(\Xi)}[S_t S_t^*],
+\end{equation}
+\begin{equation}
+\Mexp_{q(\Xi)}[X S^*] =  \frac{1}{T} \sum_{t=1}^T \Mexp_{q(\Xi)}[X_t S_t^*].
+\end{equation}
 Распределение $\Prob(X_{t,m_t},S_t \mid X_{t,o_t})$ задается однозначно следующими условиями:
 \begin{enumerate}
 \item
@@ -146,35 +156,26 @@ $\bA(\theta)$ -- матрица линейного преобразования;
 \item
 $S_t, N_t$ --  комплексные гауссовские векторы,  которые имеют нулевую псевдоковариацию.
 \end{enumerate}
-На практике, не требуется напрямую находить ковариации для распределений $q(\Xi_t), t=1,...,T$, достаточно лишь найти условные вторые моменты $\Mexp_{q(\Xi)}[XX^*]$, $\Mexp_{q(\Xi)}[XS^*]$, $\Mexp_{q(\Xi)}[SS^*]$. Ввиду того, что наблюдения $X_t, t = 1,\ldots, T$ являются независимыми и одинаково распределенными, мы можем найти их путем усреднения соответствующих условных вторых моментов по всем имеющимся наблюдениям:
-\begin{equation*}
-\Mexp_{q(\Xi)}[XX^*] = \frac{1}{T}\sum_{t=1}^T \Mexp[X_t X_t^* \mid \mathcal{I}_t],
-\end{equation*}
-\begin{equation*}
-\Mexp_{q(\Xi)}[S S^*] =  \frac{1}{T} \sum_{t=1}^T \Mexp[S_t S_t^* \mid \mathcal{I}_t],
-\end{equation*}
-\begin{equation*}
-\Mexp_{q(\Xi)}[X S^*] =  \frac{1}{T} \sum_{t=1}^T \Mexp[X_t S_t^* \mid \mathcal{I}_t].
-\end{equation*}
-Рассмотрим случай, когда наблюдение $X_t$ является полностью доступным, т.е. $m_t = \varnothing$. Тогда, апостериорное распределение $\Prob(X_{t,m_t},S_t \mid \mathcal{I}_t)$ сводится к распределению $\Prob(S_t \mid \mathcal{I}_t)$, а условные моменты $\Mexp[X_t X_t^* \mid \mathcal{I}_t]$, $\Mexp[X_t S_t^* \mid \mathcal{I}_t]$, $\Mexp[S_t S_t^* \mid \mathcal{I}_t]$ вычисляются по следующей схеме. Находим параметры апостериорного распределения $\Prob(S_t \mid \mathcal{I}_t), t = 1,\ldots, T$:
+На практике, не требуется напрямую находить ковариации для распределений $q(\Xi_t), t=1,...,T$, достаточно лишь найти усредненные условные вторые моменты $\Mexp_{q(\Xi)}[XX^*]$, $\Mexp_{q(\Xi)}[XS^*]$, $\Mexp_{q(\Xi)}[SS^*]$, используя формулы (2-4). \\
+Рассмотрим случай, когда наблюдение $X_t$ является полностью доступным, т.е. $m_t = \varnothing$. Тогда, апостериорное распределение $\Prob(X_{t,m_t},S_t \mid \Info_t)$ сводится к распределению $\Prob(S_t \mid \Info_t)$, а условные моменты $\Mexp[X_t X_t^* \mid \Info_t]$, $\Mexp[X_t S_t^* \mid \Info_t]$, $\Mexp[S_t S_t^* \mid \Info_t]$ вычисляются по следующей схеме. Находим параметры апостериорного распределения $\Prob(S_t \mid \Info_t), t = 1,\ldots, T$:
 \begin{equation*}
 \left\{ \begin{aligned} 
-\Mexp[S_t \mid \mathcal{I}_t] &= \bGamma^*\bA^* \bR^{-1}x_t, \\
-\cov(S_t \mid \mathcal{I}_t) &= \bGamma - \bGamma^*\bA^*  \bR^{-1}\bA\bGamma.
+\Mexp[S_t \mid \Info_t] &= \bGamma^*\bA^* \bR^{-1}x_t, \\
+\cov(S_t \mid \Info_t) &= \bGamma - \bGamma^*\bA^*  \bR^{-1}\bA\bGamma.
 \end{aligned} \right.
 \end{equation*}
 И вычисляем условные моменты следующим образом:
 \begin{equation*}
-\Mexp [X_t X_t^* \mid \mathcal{I}_t] = \Mexp[X_t \mid \mathcal{I}_t] \cdot \Mexp[X_t^* \mid \mathcal{I}_t] = x_t x_t^*,
+\Mexp [X_t X_t^* \mid \Info_t] = \Mexp[X_t \mid \Info_t] \cdot \Mexp[X_t^* \mid \Info_t] = x_t x_t^*,
 \end{equation*}
 \begin{equation*}
-\Mexp [X_t S_t^* \mid \mathcal{I}_t] = \Mexp[X_t \mid \mathcal{I}_t] \cdot \Mexp[S_t^* \mid \mathcal{I}_t] = x_t \cdot \Mexp[S_t^* \mid \mathcal{I}_t] = x_t \cdot x_t^* \cdot \bR^{-1} \bA \bGamma,
+\Mexp [X_t S_t^* \mid \Info_t] = \Mexp[X_t \mid \Info_t] \cdot \Mexp[S_t^* \mid \Info_t] = x_t \cdot \Mexp[S_t^* \mid \Info_t] = x_t \cdot x_t^* \cdot \bR^{-1} \bA \bGamma,
 \end{equation*}
 \begin{equation*}
-\Mexp [S_t S_t^* \mid \mathcal{I}_t] = \Mexp[S_t \mid \mathcal{I}_t] \cdot \Mexp[S_t^* \mid \mathcal{I}_t] + \cov(S_t \mid\mathcal{I}_t). 
+\Mexp [S_t S_t^* \mid \Info_t] = \Mexp[S_t \mid \Info_t] \cdot \Mexp[S_t^* \mid \Info_t] + \cov(S_t \mid\Info_t). 
 \end{equation*} \\
 Теперь рассмотрим случай, когда наблюдение $X_t$ содержит пропуски, т.е. $m_t \ne \varnothing$.
-Сначала найдем апостериорное распределение $\Prob(X_m \mid \mathcal{I})$. Для достижения этой цели, для каждой пары $ \{ (o_t, m_t): m_t \ne \varnothing \}$ создадим разбиение оценки ковариационной матрицы наблюдений $\bR$ на блоки, индуцированное этим разбиением множества индексов, оно имеет следующий вид:
+Сначала найдем апостериорное распределение $\Prob(X_m \mid \Info)$. Для достижения этой цели, для каждой пары $ \{ (o_t, m_t): m_t \ne \varnothing \}$ создадим разбиение оценки ковариационной матрицы наблюдений $\bR$ на блоки, индуцированное этим разбиением множества индексов, оно имеет следующий вид:
 \begin{equation*}
 \bR =
 \begin{pmatrix}
@@ -186,48 +187,48 @@ $S_t, N_t$ --  комплексные гауссовские векторы,  к
 \begin{equation*}
 \bR_{a,b} = (\bR_{ij})_{i \in a, j \in b}.
 \end{equation*}
-Для каждого наблюдения, содержащего пропуски, требуется найти апостериорное распределение пропущенных значений, $\Prob(X_{t, m_t} \mid X_{t, o_t}=x_{t, o_t},\Upsilon^{(\tau-1)}), t=1,\ldots,T, m_t \ne \varnothing$ . Обозначим через $\mathcal{I}_t$ доступную информацию $X_{t, o_t}=x_{t, o_t},\Upsilon^{(\tau-1)}$ на итерации $\tau$.
-Параметры апостериорного распределения $\Prob(X_{t, m_t} \mid \mathcal{I}_t), t=1,\ldots,T$ на итерации $\tau$ можно найти следующим образом:
+Для каждого наблюдения, содержащего пропуски, требуется найти апостериорное распределение пропущенных значений, $\Prob(X_{t, m_t} \mid X_{t, o_t}=x_{t, o_t},\Upsilon^{(\tau-1)}), t=1,\ldots,T, m_t \ne \varnothing$ . Обозначим через $\Info_t$ доступную информацию $X_{t, o_t}=x_{t, o_t},\Upsilon^{(\tau-1)}$ на итерации $\tau$.
+Параметры апостериорного распределения $\Prob(X_{t, m_t} \mid \Info_t), t=1,\ldots,T$ на итерации $\tau$ можно найти следующим образом:
 \begin{equation*}
 \left\{ \begin{aligned} 
-\Mexp[X_{t, m_t} \mid \mathcal{I}_t] &= \bR_{m_t, o_t}\left(\bR_{o_t, o_t}\right)^{-1}\cdot x_{t, o_t}, \\
-\cov(X_{t, m_t}\mid \mathcal{I}_t) &= \bR_{m_t, m_t}-\bR_{m_t, o_t}\left(\bR_{o_t, o_t}\right)^{-1}\bR_{o_t, m_t},
+\Mexp[X_{t, m_t} \mid \Info_t] &= \bR_{m_t, o_t}\left(\bR_{o_t, o_t}\right)^{-1}\cdot x_{t, o_t}, \\
+\cov(X_{t, m_t}\mid \Info_t) &= \bR_{m_t, m_t}-\bR_{m_t, o_t}\left(\bR_{o_t, o_t}\right)^{-1}\bR_{o_t, m_t},
 \end{aligned} \right.
 \end{equation*}
 где $\bR_{o_t, o_t}= \bR_{o_t, o_t}^{(\tau-1)}$, 
 $\bR_{o_t, m_t}= \bR_{o_t, m_t}^{(\tau-1)}$, 
 $\bR_{m_t, o_t}= \bR_{m_t, o_t}^{(\tau-1)}$,
 $\bR_{m_t, m_t}= \bR_{m_t, m_t}^{(\tau-1)}$.\\
-Для каждого наблюдения $X_t$, содержащего пропуски, определим условные первый и второй начальный момент $\Mexp[X_t X_t^* \mid \mathcal{I}_t]$:
+Для каждого наблюдения $X_t$, содержащего пропуски, определим условные первый и второй начальный момент $\Mexp[X_t X_t^* \mid \Info_t]$:
 \begin{equation*}
 \begin{gathered}
-\Mexp[X_t \mid \mathcal{I}_t] = \Mexp \bigg[\begin{pmatrix} X_{t,o_t} \\ X_{t,m_t}\end{pmatrix}\Big| \mathcal{I}_t\bigg] 
-= \begin{pmatrix} x_{t,o_t} \\ \Mexp[X_{t,m_t} \mid \mathcal{I}_t]\end{pmatrix},\\
-\Mexp[X_t X_t^* \mid \mathcal{I}_t] = \Mexp [X_t \mid \mathcal{I}_t] \cdot \Mexp [X_t^* \mid \mathcal{I}_t] + \cov (X_t \mid \mathcal{I}_t) \\
-= \Mexp [X_t \mid \mathcal{I}_t] \cdot \Mexp [X_t^* \mid \mathcal{I}_t] +
+\Mexp[X_t \mid \Info_t] = \Mexp \bigg[\begin{pmatrix} X_{t,o_t} \\ X_{t,m_t}\end{pmatrix}\Big| \Info_t\bigg] 
+= \begin{pmatrix} x_{t,o_t} \\ \Mexp[X_{t,m_t} \mid \Info_t]\end{pmatrix},\\
+\Mexp[X_t X_t^* \mid \Info_t] = \Mexp [X_t \mid \Info_t] \cdot \Mexp [X_t^* \mid \Info_t] + \cov (X_t \mid \Info_t) \\
+= \Mexp [X_t \mid \Info_t] \cdot \Mexp [X_t^* \mid \Info_t] +
 \begin{pmatrix}
 \mathbf{O}_{o_t, o_t} & \mathbf{O}_{o_t, m_t} \\
-\mathbf{O}_{m_t, o_t} & \cov(X_{t, m_t} \mid \mathcal{I}_t) 
+\mathbf{O}_{m_t, o_t} & \cov(X_{t, m_t} \mid \Info_t) 
 \end{pmatrix},
 \end{gathered}
 \end{equation*}
 где $\mathbf{O}_{o_t, o_t}$, $\mathbf{O}_{o_t, m_t}$, $\mathbf{O}_{m_t, o_t}$ -- нулевые блочные матрицы. Разбиение указанной матрицы на четыре блока, три из которых состоят из нулей, индукцировано разбиением множества индексов $\{1,\ldots,L\}$ на множества $o_t, m_t$. \\
-Параметры апостериорного распределения $\Prob(S_t \mid \mathcal{I}_t), t = 1,\ldots, T$ можно найти следующим образом:
+Параметры апостериорного распределения $\Prob(S_t \mid \Info_t), t = 1,\ldots, T$ можно найти следующим образом:
 \begin{equation*}
 \left\{ \begin{aligned} 
-\Mexp[S_t \mid \mathcal{I}_t] &= \bGamma^*\bA^* \bR^{-1}\Mexp [X_t \mid \mathcal{I}_t], \\
-\cov(S_t \mid \mathcal{I}_t) &= \bGamma - \bGamma^*\bA^*  \bR^{-1}\bA\bGamma + \bGamma^*\bA^* \bR^{-1}\cov(X_t \mid \mathcal{I}_t)\bR^{-1} \bA\bGamma,
+\Mexp[S_t \mid \Info_t] &= \bGamma^*\bA^* \bR^{-1}\Mexp [X_t \mid \Info_t], \\
+\cov(S_t \mid \Info_t) &= \bGamma - \bGamma^*\bA^*  \bR^{-1}\bA\bGamma + \bGamma^*\bA^* \bR^{-1}\cov(X_t \mid \Info_t)\bR^{-1} \bA\bGamma,
 \end{aligned} \right.
 \end{equation*}
 где $\bA=\bA(\theta^{(\tau-1)})$, $\bGamma=\bGamma^{(\tau-1)}$, $\bR=\bR^{(\tau-1)}$; эти же обозначения используются и далее, если не оговорено иное. Для вывода этих формул используются телескопическое свойство условного математического ожидания и закон полной дисперсии (подробности приведены в приложении Б). \\
-Оценим $\Mexp [S_t S_t^* \mid \mathcal{I}_t]$:
+Оценим $\Mexp [S_t S_t^* \mid \Info_t]$:
 \begin{equation*}
-\Mexp [S_t S_t^* \mid \mathcal{I}_t] = \Mexp[S_t \mid \mathcal{I}_t] \cdot \Mexp[S_t^* \mid \mathcal{I}_t] + \cov(S_t \mid \mathcal{I}_t),
+\Mexp [S_t S_t^* \mid \Info_t] = \Mexp[S_t \mid \Info_t] \cdot \Mexp[S_t^* \mid \Info_t] + \cov(S_t \mid \Info_t),
 \end{equation*}
-Оценим $\Mexp [X_t S_t^* \mid \mathcal{I}_t]$:
+Оценим $\Mexp [X_t S_t^* \mid \Info_t]$:
 \begin{equation*}
 \begin{gathered}
-\Mexp [X_t S_t^* \mid \mathcal{I}_t] = \Mexp[X_t X_t^* \mid \mathcal{I}_t]\bR^{-1}\bA\bGamma.
+\Mexp [X_t S_t^* \mid \Info_t] = \Mexp[X_t X_t^* \mid \Info_t]\bR^{-1}\bA\bGamma.
 \end{gathered}
 \end{equation*}
 \subsection{М-шаг}
@@ -260,39 +261,6 @@ $\bR_{m_t, m_t}= \bR_{m_t, m_t}^{(\tau-1)}$.\\
 \end{equation*}
 
 \section{Результаты численного эксперимента}
-
-\subsection{Пример 1}
-\begin{table}[H]
-\centering
-\begin{tabular}[t]{|c|c|}
-\hline
-   Число сенсоров &1000\\
-\hline  
-   Частота & 1000 Гц\\
-\hline
-  Приведенное давление шума  $p_n$ & 0.0016 Па/$\sqrt{\text{Гц}}$   \\
-\hline
-Приведенное давление сигнала $p_s$ & 0.01 Па/$\sqrt{\text{Гц}}$\\
-\hline
-Длина волны & 1.5  м\\
-\hline
-Расстояние до источника $r$ &100 м, 1000 м\\
-\hline
-    Расстояние между сенсорами& 0.75 м\\
-\hline
-\end{tabular}
-\caption{Исходные данные}\label{table1}
-\end{table}
-Дисперсия сигнала:
-$$
-d_s = p_s^2/(r/r_0)^2, \quad r_0 = 1\text{ м},
-$$
-Дисперсия шума:
-$$
-d_n = p_n^2.
-$$
-
-
 
 \subsection{Первый набор начальных условий}
 

@@ -209,7 +209,7 @@ def multistart_EM(X: np.ndarray,
                   show_lkhd: bool = True,
                   show_angles: bool = True,
                   show_time: bool = True,
-                  debug: bool = True) -> tuple[np.ndarray,
+                  debug: bool = False) -> tuple[np.ndarray,
                                                 np.ndarray,
                                                 np.float64]:
     """
@@ -302,9 +302,9 @@ def multistart_EM2(X: np.ndarray,
                    show_lkhd: bool = True,
                    show_angles: bool = True,
                    show_time: bool = True,
-                   debug: bool = True) -> tuple[np.ndarray,
-                                                np.ndarray,
-                                                np.float64]:
+                   debug: bool = False) -> tuple[np.ndarray,
+                                                 np.ndarray,
+                                                 np.float64]:
     """
     Реализует мультистарт для ЕМ-алгоритма.
 
