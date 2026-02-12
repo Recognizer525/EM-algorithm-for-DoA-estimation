@@ -115,7 +115,7 @@ def EM(angles: np.ndarray,
                 M_i, O_i = M[i, ][M[i, ] > -1], O[i, ][O[i, ] > -1]
 
                 R_OO = R[np.ix_(O_i, O_i)]
-                R_OO = sn.cov_correcter(R_OO, 0.1 * reg_coef)
+                #R_OO = sn.cov_correcter(R_OO, 0.1 * reg_coef)
                 R_MO = R[np.ix_(M_i, O_i)]
                 R_MM = R[np.ix_(M_i, M_i)]
 
